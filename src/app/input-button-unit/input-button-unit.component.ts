@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-button-unit',
@@ -6,21 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./input-button-unit.component.scss']
 })
 export class InputButtonUnitComponent implements OnInit {
+  @Output() submit: EventEmitter<string> = new EventEmitter<string>();
   title: string = 'Hello World';
 
   constructor() { 
-    console.log('in constructor');
-    this.changeTitle('My First Angular App');
-    console.log(this.title);
   }
   
   ngOnInit(): void { 
-    setTimeout(() => {
-      this.title = 'This is not the title you are looking for';
-    }, 3000);
   }
 
-  changeTitle(newTitle: string): void {
-    this.title = newTitle;
+  submitValue(newTitle: string) {
+    this.submit.emit(newTitle);
   }
 }
